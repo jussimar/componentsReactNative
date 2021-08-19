@@ -1,15 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {Component} from 'react';
+import { StyleSheet, Text, View, Switch } from 'react-native';
+import Slider from '@react-native-community/slider';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      valor:0,
+      status: false
+    }
+  }
+
+  render(){
+  
+    return (
+      <View style={styles.container}>
+         <Text style={styles.titulo1}>Usando Componentes de Interface</Text>
+         <Text style={styles.titulo2}>Exemplo de Slider</Text>
+         
+         <Slider
+          style={{width: 200, height: 40}}
+          minimumValue={0}
+          maximumValue={100}
+          onValueChange={(valorSlider)=>this.setState({valor:valorSlider})}
+          minimumTrackTintColor="#FF0000"
+          maximumTrackTintColor="#000000"
+        />
+        <Text style={styles.resultado}>Valor Slider: {this.state.valor.toFixed(2)}</Text>
+        
+        <Text style={styles.titulo2}>Exemplo de Switch</Text>
+        <Text> 
+            Status
+        <Switch 
+          value={this.state.status}
+          onValueChange={(valorStatus)=>this.setState({status:valorStatus})}
+        />
+        </Text>
+        <Text style={styles.resultado}>
+          Situação do status: {(this.state.status ? "Ativo":"inativo")}
+          
+        </Text>
+      </View>
+    );
+  }
 }
+export default App;
 
 const styles = StyleSheet.create({
   container: {
@@ -18,4 +53,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  titulo1:{
+    fontSize:30,
+    textAlign: 'center',
+    marginBottom:20
+  },
+  titulo2:{
+    fontSize:25,
+    textAlign: 'center'
+  },
+  resultado:{
+    fontSize:20,
+    textAlign: 'center'
+  }
 });
